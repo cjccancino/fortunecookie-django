@@ -96,7 +96,7 @@ $(function() {
     });
   });
   $('.fortune-cookie').delay(400).fadeIn(400);
-  // $('.refresh').delay(1200).fadeIn(400);
+  $('.refresh').delay(1200).fadeIn(400);
 });
 </script>
 {% endblock %}
@@ -104,48 +104,11 @@ $(function() {
 {% block mainclass %}container{% endblock %}
 
 {% block content %}
-{% if object %}
-  <div class="fortune-cookie text-center" style="display: none;">
-    <a href="#">
-      <img class="img-responsive center-block" src="{% static 'img/fortunecookie.png' %}">
-      <h4 class="text-center">{% trans 'Click to reveal your fortune' %}</h4>
-    </a>
-  </div>
-  <div class="jumbotron clearfix text-center" style="display: none;">
-    <div id="fortune-carousel" class="carousel slide" data-interval="false">
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <h1 class="fortune">{{ object.fortune }}</h1>
-        </div>
-      </div>
-      <!-- <a class="left carousel-control" href="#fortune-carousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">{% trans 'Previous' %}</span>
-      </a>
-      <a class="right carousel-control" href="#fortune-carousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">{% trans 'Next' %}</span>
-      </a> -->
-    </div>
-  </div>
-  <h1 class="text-center refresh" style="display: none;">
-    <a href="{{ request.path }}">
-      <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
-      <h5 class="text-center">{% trans 'Load a new fortune' %}</h5>
-    </a>
-  </h1>
-  <h1 class="text-center refresh" style="display: none;">
-    <a href="{{object.id}}/update">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-      <h5 class="text-center">{% trans 'Add this fortune' %}</h5>
-    </a>
-  </h1>
-{% else %}
-  <h1 class="text-center nofortune">
-    <a href="{{ request.path }}">
-      <span class="glyphicon glyphicon-flash" aria-hidden="true"></span>
-      <h5 class="text-center">{% trans 'No fortunes available yet' %}</h5>
-    </a>
-  </h1>
-{% endif %}
+<form method="post" ALIGN='center'> 
+    {% csrf_token %} 
+    {{ form.fortune }}
+    <input class="btn btn-success" type="submit" value="Save">
+    <a class="btn btn-danger" href="/" role="button">Cancel</a>
+</form> 
 {% endblock content %}
+

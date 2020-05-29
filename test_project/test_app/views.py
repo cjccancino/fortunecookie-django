@@ -1,10 +1,14 @@
 # Django
 from django.shortcuts import render_to_response
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView
+from django.shortcuts import (get_object_or_404, 
+                              render, 
+                              HttpResponseRedirect) 
 
 # Django-FortuneCookie
 from fortunecookie.models import FortuneCookie
+from fortunecookie.forms import FortuneForm
 
 
 def handle_error(request, status, title, message):
@@ -61,3 +65,22 @@ class IndexView(DetailView):
 
 
 index = IndexView.as_view()
+
+
+class CookieUpdateView(UpdateView): 
+    # specify the model you want to use 
+    model = FortuneCookie 
+    template_name = 'test_app/update_view.html'
+  
+    # specify the fields 
+    fields = [ 
+        "fortune"
+    ] 
+
+    # can specify success url 
+    # url to redirect after sucessfully 
+    # updating details 
+    success_url ="/"
+
+update = CookieUpdateView.as_view()
+

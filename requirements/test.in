@@ -1,9 +1,0 @@
-django-extensions
-djangorestframework
-flake8
-pep8
-pytest
-pytest-cov
-pytest-django
-pytest-flake8
-pytest-runner
